@@ -29,6 +29,8 @@ If you are looking for that new computer, many points programs will let you earn
 on your daily purchases and you may find that at the end of the year you've earned enough bonus points to
 make the credit company buy that computer for you!
 
+Where do you find these cards and how do you get them? CC Beni will show you.
+
 Know your buying power
 --------------------------
 
