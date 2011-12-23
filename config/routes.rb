@@ -1,5 +1,9 @@
 Ccbeni::Application.routes.draw do
+  resources :cards
+
   #get \"users\/show\"
+  get "cards/new"
+  get "cards/show"
 
   root :to => "home#index"
 
