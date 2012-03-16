@@ -1,0 +1,13 @@
+= form_for [@card,@card.carddetails.new] do |f|
+  
+  .field
+    = f.label :title
+    = f.text_field :title
+  .field
+    = f.label :short_desc
+    = f.text_field :short_desc
+  .field
+    = f.label :long_desc
+    = f.text_field :long_desc
+  .actions
+    = f.submit 'Save'

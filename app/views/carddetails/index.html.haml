@@ -1,0 +1,23 @@
+%h1 Listing carddetails
+
+%table
+  %tr
+    %th Title
+    %th Short desc
+    %th Long desc
+    %th
+    %th
+    %th
+
+  - @carddetails.each do |carddetail|
+    %tr
+      %td= carddetail.title
+      %td= carddetail.short_desc
+      %td= carddetail.long_desc
+      %td= link_to 'Show', carddetail
+      %td= link_to 'Edit', edit_carddetail_path(carddetail)
+      %td= link_to 'Destroy', carddetail, :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New Carddetail', new_carddetail_path

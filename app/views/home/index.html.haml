@@ -1,3 +1,64 @@
 %h3 Home
 - @users.each do |user|
   %p User: #{link_to user.name, user}
+%h1 All Credit Card Information
+- @cards.each do |card|
+  %div{:class=>"geninfo"}
+    %p
+      %b Card General Information
+      %p  
+        Card Type:-
+        = card.card_type 	 
+      %p
+        Card Name
+        = card.card_name
+      %p
+        Card Description
+        = card.description
+      %p
+        Card Example
+        = card.example
+      %p
+        Card Cash Back
+        = card.cash_back
+      %p
+        Card Credit Builder
+        = card.credit_builder
+
+      %p
+        Card Expert Opinion
+        = card.expertopinion
+
+      %p
+        Card More Info
+        = card.moreinfo
+
+      %p
+        Card Image
+        = image_tag card.avatar.url(:thumb)
+        
+  %div{:class=>"geninfo"}
+    %p 
+      %b Card Details
+    - card.carddetails.each do |cardd|
+      %p
+        %b title
+        = cardd.title 	 
+      %p
+        %b short description
+        = cardd.short_desc
+      %p
+        %b Long Description
+        = cardd.long_desc
+  %div{:class=>"geninfo"}
+    %p 
+      %b Card Features
+    - card.features.each do |cardf|
+      %p
+        = cardf.content 	
+        = "aaa" 
+      .seperate
+        %hr  
+  %div{:class=>"seperator"}
+
+

@@ -12,7 +12,6 @@
     %tr
       %td= card.card_name
       %td= card.card_type
-
       %td= link_to 'Show', card
       %td= link_to 'Edit', edit_card_path(card)
       %td= link_to 'Destroy', card, :confirm => 'Are you sure?', :method => :delete

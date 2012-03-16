@@ -1,0 +1,8 @@
+= form_for [@card,@card.features.new] do |f|
+ 
+  .field
+    = f.label :Feature
+    = f.text_field :content
+
+  
+    = f.submit 'Save'

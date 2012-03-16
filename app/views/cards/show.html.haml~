@@ -34,7 +34,7 @@
   = render "features/form" 
 
 %p{:class=>:feature}
-  %b All Card Deatils
+  %b All Features
   - for carddetail in @card.carddetails
     %p 
       %b Title:

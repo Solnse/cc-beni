@@ -1,0 +1,12 @@
+class AddDescriptionToCards < ActiveRecord::Migration
+  def change
+    add_column :cards, :description, :string
+    add_column :cards, :example, :text
+    add_column :cards, :cash_back, :text
+    add_column :cards, :credit_builder, :text
+    add_column :cards, :expertopinion, :text
+    add_column :cards, :moreinfo, :text
+
+
+  end
+end

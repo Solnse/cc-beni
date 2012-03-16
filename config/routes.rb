@@ -1,6 +1,16 @@
 Ccbeni::Application.routes.draw do
-  resources :cards
+  
+  resources :carddetails
 
+  resources :mycredits
+  resources :features
+  
+  resources :cards do
+     resources :features
+     resources :carddetails	
+  end 
+
+ 
   #get \"users\/show\"
   get "cards/new"
   get "cards/show"

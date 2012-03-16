@@ -1,0 +1,15 @@
+%p#notice= notice
+
+%p
+  %b Title:
+  = @carddetail.title
+%p
+  %b Short desc:
+  = @carddetail.short_desc
+%p
+  %b Long desc:
+  = @carddetail.long_desc
+
+= link_to 'Edit', edit_carddetail_path(@carddetail)
+\|
+= link_to 'Back', carddetails_path
