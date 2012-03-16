@@ -55,6 +55,6 @@ Most people believe their credit situation is worse than it really is. This is u
 your actual credit situation and how to successfully use credit in daily life. CC Beni is here to demysitfy
 the world of credit and benefits for you.
 
-------------------------
+------------------------------
 
-It's your money, take back control of how you spend it. Start maximizing your benefits with CC Beni.
+It's your money, take back control of how you spend it. Start maximizing your benefits with CC Beni. 
