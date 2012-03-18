@@ -10,4 +10,4 @@
 4)currently i fetched the data from http://www.moneysupermarket.com/credit-cards . also some data fetch from 
   http://www.choose.net/money/credit-cards but from this site the detail page of a particular 
   credit card is remain to fetch
-5)for this need to run 1)rake :fetch_cards 2) rake all_cards:fetch_cards1
+
