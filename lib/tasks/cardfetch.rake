@@ -1,5 +1,4 @@
- 
-desc "Fetch product prices"  
+desc "Fetch product info from http://www.moneysupermarket.com/credit-cards/"  
 task :fetch_cards => :environment do  
       require 'rubygems'  
     require 'nokogiri'  
@@ -10,10 +9,9 @@ task :fetch_cards => :environment do
  
 url = "http://www.moneysupermarket.com/credit-cards/"
 call_import_cards_data(url);
-for i in 1..10
+for i in 1..9
     url = "http://www.moneysupermarket.com/credit-cards/productlistinggadget/?productSelection=All+Cards&viewFragment=Product-listing-prd-bt-prc-rwd-apr-wch&showTopCards=false&numberOfDisplayedProducts=#{i*25}"  
-    p "called url"  
-    p i*25
+    
      begin
       call_import_cards_data(url);
      rescue => e
@@ -44,31 +42,28 @@ count=1
       card.card_name = item.at_css(".provider").text.split("\n")[1].strip
       p "card name"
       p card.card_name
-      card.description = item.at_css(".product-name-tab ,.clickable-tab,.product").text.split("\n")[1].strip  
-      #tabone = item.at_css(".balance-transfer-tab  ,.clickable-tab p").text 
+      card.description = item.at_css(".product-name-tab-active ,.clickable-tab,.product").text.split("\n")[3].strip  
+
+       #tabone = item.at_css(".balance-transfer-tab  ,.clickable-tab p").text 
       carddet = item.at_css(".balance-transfer-tab  ,.clickable-tab p").text
       
       card.carddetails.new(:title=>carddet.split("\n")[1].strip,:short_desc=>carddet.split("\n")[3]+carddet.split("\n")[5].strip) 
       	
       #tabtwo = item.at_css(".purchases-tab ,.clickable-tab p").text
       carddet = item.at_css(".purchases-tab ,.clickable-tab p").text
-      p carddet
-      card.carddetails.new(:title=>carddet.split("\n")[1].strip,:short_desc=>carddet.split("\n")[2].strip)
+       card.carddetails.new(:title=>carddet.split("\n")[1].strip,:short_desc=>carddet.split("\n")[2].strip)
       #tabthree = item.at_css(".rewards-tab, .clickable-tab p").text	
       carddet = item.at_css(".rewards-tab, .clickable-tab p").text
-      p carddet
-      card.carddetails.new(:title=>carddet.split("\n")[2].strip)
+       card.carddetails.new(:title=>carddet.split("\n")[2].strip)
      
       #tabfour = item.at_css(".apr-tab, .clickable-tab p").text		    
       carddet = item.at_css(".apr-tab, .clickable-tab p").text
-      p carddet
-      card.carddetails.new(:title=>carddet.split("\n")[1].strip,:short_desc=>carddet.split("\n")[2].strip)
+       card.carddetails.new(:title=>carddet.split("\n")[1].strip,:short_desc=>carddet.split("\n")[2].strip)
      
       #tabfive = item.at_css(".reviews-tab").text		    
      
        card.carddetails.new(:title=>item.at_css(".small-review").text)
-       card.example = doc.css(".representative-example-text p").text	
-     		
+      	
     	 
        #puts "card name #{card_name} "
        #puts "card description #{description}"
@@ -81,8 +76,7 @@ count=1
      	 
        end
     i=-1   
-    p "all cards"
-    p all_cards
+    # p all_cards
     doc.css(".info").each do |item|  
     i=i+1
     card = all_cards[i]
@@ -103,22 +97,25 @@ count=1
 	   card.carddetails[3].long_desc = item.at_css(".apr-tab-details,.expandable").text.strip
 	   #tabfivedesc = item.at_css(".reviews-tab-details,.expandable")
            card.carddetails[4].long_desc = item.at_css(".reviews-tab-details,.expandable").text.strip
-	   # puts features
-            #puts tabonedesc
-           # puts tabtwodesc
-           # puts tabthreedesc
-	   # puts tabfourdesc
-            #puts tabfivedesc
+	    
 
 	     
        card.card_type = "Visa"
        card.save
      end 
 
- 
-
+      i=-1   
+     doc.css(".representative-example-text p").each do |item|  
+    i=i+1
+  #   p item
+  #   p item.text 
+     card = all_cards[i]
+	     card.example=item.text
+        card.save
+    end
   
 count=count+1
+break;
    end
     
 end	
