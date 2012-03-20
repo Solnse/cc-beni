@@ -80,4 +80,28 @@ class CardsController < ApplicationController
       format.json { head :ok }
     end
   end
+ 
+  def search
+    if !params[:creditcard].blank?
+      @cards = Card.find(:all,:conditions=>["card_name like ?","%#{params[:creditcard][:name]}%"])
+    
+    if @cards.blank?
+      flash[:notice] = "not found"  
+    else
+      flash[:notice] = "found"  
+      render :action=> :index  and return;
+    end
+    end	
+  end
+
+  def find_cards_for_me
+      	p params[:profession]
+        p params[:purpose] 
+      if !params[:profession].blank?
+          
+      end
+
+  end
+
 end
+

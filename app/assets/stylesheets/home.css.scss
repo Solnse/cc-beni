@@ -1,3 +1,50 @@
 // Place all the styles related to the home controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+ 
+.roundme {
+  -moz-border-radius:    20px;
+  -webkit-border-radius: 20px;
+  border-radius:         20px;
+  width: 250px;	
+  height:20px;
+  background-color: #999999;
+	
+  
+}
+
+.placeleft{
+ -moz-border-radius:     20px;
+  -webkit-border-radius: 20px;
+  border-radius:         20px;
+  width: 250px;
+  height:20px;		
+  background-color: #999999;
+  padding-left:20px;
+  float:left
+}
+ 
+.placemeleft{
+   background-color: inactivecaptiontext;
+   float: left;
+   width: 200px;
+   -moz-border-radius:     20px;
+   -webkit-border-radius: 20px;
+   border-radius:         20px;
+   height:30px;
+   line-height:30px;
+   text-align:center;		
+}
+.placemeright{
+   padding-left:20px;
+   margin-left:280px;	
+   background-color: inactivecaptiontext;
+      width: 250px;
+   -moz-border-radius:     20px;
+   -webkit-border-radius: 20px;
+   border-radius:         20px;
+   height:30px;
+   line-height:30px;
+   text-align:center;	
+}

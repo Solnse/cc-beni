@@ -1,0 +1,13 @@
+%div
+  Please Enter Following Question To Get The BEst Choice For You
+  Also If You Sign Up You Can See More Information On Your Profile Page
+%div
+  = form_tag "/cards/find_cards_for_me"
+  %div
+    = label_tag "Enter Your Profession"
+    = text_field_tag "profession"
+  %div
+    = label_tag "Enter Key words for credit cards for the purpose you want seperated by coma , . e.g grocessary,loan,bonus,gift etc"
+    = text_field_tag "purpose"
+  %div{:class=>"form_field"}
+    = submit_tag "Submit"

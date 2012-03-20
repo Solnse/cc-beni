@@ -1,0 +1,16 @@
+= form_for @cards_profile do |f|
+  -if @cards_profile.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@cards_profile.errors.count, "error")} prohibited this cards_profile from being saved:"
+      %ul
+        - @cards_profile.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :profile_id
+    = f.number_field :profile_id
+  .field
+    = f.label :card_id
+    = f.number_field :card_id
+  .actions
+    = f.submit 'Save'

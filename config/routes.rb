@@ -1,10 +1,19 @@
 Ccbeni::Application.routes.draw do
   
+  resources :cards_profiles
+
+  resources :profiles
+
   resources :carddetails
 
   resources :mycredits
   resources :features
-  
+  match "cards/search" =>"cards#search"
+  match "cards/find_cards_for_me" =>"cards#find_cards_for_me"
+
+
+ 
+ 
   resources :cards do
      resources :features
      resources :carddetails	
@@ -17,10 +26,9 @@ Ccbeni::Application.routes.draw do
 
   root :to => "home#index"
 
-  devise_for :users
+  devise_for :users, :controllers => {:sessions =>"sessions"}
   resources :users, :only => :show
-
-
+   
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

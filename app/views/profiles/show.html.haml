@@ -1,0 +1,20 @@
+%p#notice= notice
+
+%p
+  %b User:
+  = @user.email
+
+= link_to 'Edit', edit_profile_path(@user)
+\|
+= link_to 'Back', profiles_path
+
+%div
+  = label_tag "Add Your Credit Card"
+  = text_field_tag "creditcard"
+%div
+  = form_tag "/"
+  = label_tag "Enter Your purpose for current use of credit card . e.g. petrol purchase,camera purchase etc"
+  = text_field_tag "creditcard"
+  = submit_tag "Submit"
+  %p
+    After Submit the credit card list will be shown

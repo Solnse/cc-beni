@@ -1,0 +1,12 @@
+%p#notice= notice
+
+%p
+  %b Profile:
+  = @cards_profile.profile_id
+%p
+  %b Card:
+  = @cards_profile.card_id
+
+= link_to 'Edit', edit_cards_profile_path(@cards_profile)
+\|
+= link_to 'Back', cards_profiles_path

@@ -16,7 +16,7 @@
 db/*.sqlite3
 /log/*
 tmp/*
-
+config/database.yml
 # various artifacts
 **.war
 *.rbc
@@ -62,3 +62,5 @@ tmp/*
 
 # vim artifacts
 **.swp
+# Ignore all emacs backup files
+*~

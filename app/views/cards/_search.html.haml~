@@ -1,0 +1,5 @@
+%div
+  Enter The Credit Card Name
+  = form_tag cards_my_cards_benifits_url  
+  = text_field "creditcard","name"
+  = submit_tag "Submit"

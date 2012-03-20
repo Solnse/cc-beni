@@ -1,0 +1,21 @@
+%h1 Listing cards_profiles
+
+%table
+  %tr
+    %th Profile
+    %th Card
+    %th
+    %th
+    %th
+
+  - @cards_profiles.each do |cards_profile|
+    %tr
+      %td= cards_profile.profile_id
+      %td= cards_profile.card_id
+      %td= link_to 'Show', cards_profile
+      %td= link_to 'Edit', edit_cards_profile_path(cards_profile)
+      %td= link_to 'Destroy', cards_profile, :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New Cards profile', new_cards_profile_path

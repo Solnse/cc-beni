@@ -1,13 +1,22 @@
-1)added the controller features for just adding the features of a card.
-  it has 1-m relationship for card
-2)added the carddetails controller for adding the card details there are three fields like 
-  title , short_desc,long desc
-  this is for like a site http://www.moneysupermarket.com/credit-cards/#
-   Read review,17.9 APR,Music,0% 3 month and on click description is there the three fields are like 
-   first field is in bold then short description and long description
-3)same for features they are shown in first tab in the http://www.moneysupermarket.com/credit-cards/# 
-  site
-4)currently i fetched the data from http://www.moneysupermarket.com/credit-cards . also some data fetch from 
-  http://www.choose.net/money/credit-cards but from this site the detail page of a particular 
-  credit card is remain to fetch
-5)for this need to run 1)rake :fetch_cards 2) rake all_cards:fetch_cards1
+todays task
+
+created the home page where there are two links
+  1)already have credit card
+  2)already dont have credit card
+  
+if already have credit card is clicked then card search page will come and when the name is given there
+ all the list will be shown from here the user will add the credot card to his profile(need to be done)
+  also need to ask here for registration
+
+if already dont have is clicked then this need to ask
+
+created a profile page	
+  for adding the credit card and for retrieving the best credit card option.
+
+created a rake file to fetch the info from indexcreditcards.com
+
+added the tables for making the profile and card relation as this will be many to many relationship
+
+
+
+

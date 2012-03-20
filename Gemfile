@@ -6,6 +6,8 @@ gem 'sqlite3', :group => [:development, :test]
 gem 'pg', :group => :production
 gem "thin"
 gem "heroku"
+gem 'hpricot'
+gem 'mechanize'
 group :assets do
   gem 'sass-rails',   '~> 3.1.5'
   gem 'coffee-rails', '~> 3.1.1'

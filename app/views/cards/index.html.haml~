@@ -1,21 +1,29 @@
-%h1 Listing cards
+%div
+  = render 'cards/search'
 
-%table
-  %tr
-    %th Card Name
-    %th Card Type
-    %th
-    %th
-    %th
+  %h1 Listing cards
 
-  - @cards.each do |card|
+  %table
     %tr
-      %td= card.card_name
-      %td= card.card_type
-      %td= link_to 'Show', card
-      %td= link_to 'Edit', edit_card_path(card)
-      %td= link_to 'Destroy', card, :confirm => 'Are you sure?', :method => :delete
+      %th Card Name
+      %th Card Type
+      %th
+      %th
+      %th
 
-%br
+    - @cards.each do |card|
+      %tr
+        %td= card.card_name
+        %td= card.card_type
 
-= link_to 'New Card', new_card_path
+        %td= link_to 'Show Benifits', card
+        %td= link_to 'Edit', edit_card_path(card)
+        %td= link_to 'Destroy', card, :confirm => 'Are you sure?', :method => :delete
+
+  %br
+
+  = link_to 'New Card', new_card_path
+
+  %br 
+  
+  = link_to "Do You want to add this to u r profile"
