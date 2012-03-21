@@ -17,4 +17,8 @@
   = text_field_tag "creditcard"
   = submit_tag "Submit"
   %p
-    After Submit the credit card list will be shown
+    Already added cards will be shown here 
+  - for credit in @user.profile.cards
+    %p
+    = link_to credit.card_name,card_url(credit)
+    

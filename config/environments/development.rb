@@ -17,7 +17,7 @@ Ccbeni::Application.configure do
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
   # A dummy setup for development - no deliveries, but logged
   config.action_mailer.delivery_method = :smtp
-  config.action_mailer.perform_deliveries = false
+  config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.default :charset => "utf-8"
 
@@ -33,4 +33,18 @@ Ccbeni::Application.configure do
 
   # Expands the lines which load the assets
   config.assets.debug = true
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    :address              => "smtp.gmail.com",
+    :port                 => 587,
+    :domain               => 'example.com',
+    :user_name            => 'pathakorama1@gmail.com',
+    :password             => 'narayan123',
+    :authentication       => 'plain',
+    :enable_starttls_auto => true  }
+
+
+
+
+
 end

@@ -12,7 +12,10 @@ stats_url = "http://www.indexcreditcards.com/creditcardlist.html"
    
 (doc/"div.CardInfoDivPaid").each do |carddiv|
     card = Card.new
-     
+    iname = (carddiv/"div.CardDetails/div.leftDetail/div/a/img")[0].attributes['src'].split("/").last
+    system("wget -nd -r -P #{Rails.root}/public/images/ -A jpeg,jpg,bmp,gif,png "+(carddiv/"div.CardDetails/div.leftDetail/div/a/img")[0].attributes['src'])
+	system("rm #{iname}")
+    card.fetch_image_name = iname
     card.card_name =  (carddiv/"span.CardName/a").inner_text
     card.card_type = "Visa"
      (carddiv/"div/ul/li").each do |litext|

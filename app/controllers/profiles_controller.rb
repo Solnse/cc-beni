@@ -82,4 +82,15 @@ class ProfilesController < ApplicationController
       format.json { head :ok }
     end
   end
+
+  def add_to_profile
+      if user_signed_in?
+       CardsProfile.create(:card_id=>params[:id],:profile_id=>current_user.profile.id)
+       redirect_to :back
+       else
+       session[:card_id]=params[:id]
+       redirect_to new_user_session_path
+       end		
+  end 
+
 end

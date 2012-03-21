@@ -10,8 +10,8 @@ Ccbeni::Application.routes.draw do
   resources :features
   match "cards/search" =>"cards#search"
   match "cards/find_cards_for_me" =>"cards#find_cards_for_me"
-
-
+  match "add_to_profile/:id" => "profiles#add_to_profile"
+   
  
  
   resources :cards do
