@@ -3,4 +3,10 @@ class HomeController < ApplicationController
     @users = User.all
     @cards = Card.all	
   end
+  def oldindex
+    @users = User.all
+    @cards = Card.all	
+  end
+
+
 end

@@ -95,26 +95,40 @@ def parse_html_code(doc,page,agent,title1='',title2='',title3='',title4='',title
 (doc/"table.comparison//tr").each do |row|
 	p "aaaaaaaaaaaaaaaaaaaaaa"
    i = -1
+    	
     card = Card.new
     p "zzzzzzzzzzzzzzzzzz"
     (row/"td").each do |cell|
 	p "qqqqqqqqqqqqqqqqqqqqqq"
-   p cell.inner_html    
       if cell.attributes.to_s.include?("example bold")
+              p cell.inner_html    
+   	      p "zazazazaazazazazazzaz"	    
         card = cardold[cardold.length-1]
         card.example = cell.inner_text
         
         p card 
         p "this is card"
         card.save
+       	
       else  
        i = i+1 
        p "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaasssssssssssssssssssssssssssss"
        if i == 0
        card.card_name = cell.inner_text
+	 p  "here i should get the imageeee"
+	  (cell/"").each do |aa|
+		        image = (aa/"a").inner_html.split("\"")[1] 
+	                system("wget -nd -r -l 2 -t 2 -P #{Rails.root}/app/assets/images/  "+"http://www.choose.net"+image)
+                        system("rm #{image}")   
+			card.fetch_image_name = image
+		 
+		 
+		end
+	 
        card.card_type = "Visa"
        end
        if i == 1
+	
        card.carddetails.new(:title=>title1,:short_desc=>cell.inner_text)
        end      
        if i == 2

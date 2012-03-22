@@ -1,6 +1,6 @@
 desc "Fetch product info from http://www.moneysupermarket.com/credit-cards/"  
 task :fetch_cards => :environment do  
-      require 'rubygems'  
+    require 'rubygems'  
     require 'nokogiri'  
     require 'open-uri'  
     require 'rubygems'
@@ -38,6 +38,20 @@ count=1
          card = Card.new
     card.save
     all_cards << card
+     iname = ""
+      
+     iname = item.at_css(".card  ,.apply  ,.provider-click").attributes['src'].inner_text   
+      #if !iname.blank?
+      # p "fetching the cards"
+      # p iname
+      # system("wget -nd -r -l 2 -t 2 -P #{Rails.root}/app/assets/images/  "+iname)
+     
+       #system("rm #{iname}")
+       #else
+       #p "i am here"
+       #p iname
+      #end 
+      card.fetch_image_name = iname
   
       card.card_name = item.at_css(".provider").text.split("\n")[1].strip
       p "card name"

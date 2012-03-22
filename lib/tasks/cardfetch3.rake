@@ -119,11 +119,21 @@ def parse_html_card(doc)
                 (info/"li").each do |x|
 		card.features.new(:content=> x.inner_text)
 		
-		end
-         end
+	end
+         
+        end
 	 if info.attributes.to_s.include?"carditem clearfix"
 		 
 		card.card_name = (info/"h3 a.trackLink").inner_text.split("\n")[0]
+	 end
+         if info.attributes.to_s.include?"Image"
+		image = (info/"a").inner_html.split("\"")[7]
+		if !image.blank?
+                   system("wget -nd -r -l 2 -t 2 -P #{Rails.root}/app/assets/images/  "+image)
+                   system("rm #{image}")   
+		   card.fetch_image_name = image
+		end
+	 
 	 end	
 	card.save
 end
