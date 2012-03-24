@@ -1,8 +1,10 @@
 %p#notice= notice
 
 %p
-  = link_to "Add To Profile","/add_to_profile/#{@card.id}"
-
+- if !current_user.profile.cards.include? @card
+  = link_to "Add To Profile","/add_to_profile/#{@card.id}",:method=>:post  
+- else
+  Included In Your Profile 
 %p
   %b Name:
   = @card.card_name
@@ -27,7 +29,12 @@
 %p
   %b More Information:
   = @card.moreinfo
+%p
+  %b Card Tags:
+  = @card.tag_list
     
+
+
 %p{:class=>:feature}
   %b All Features
   - for feature in @card.features

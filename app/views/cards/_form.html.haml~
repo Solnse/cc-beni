@@ -1,4 +1,4 @@
-= form_for @card :html => { :multipart => true }  do |f|
+= form_for @card ,:html => { :multipart => true }  do |f|
   -if @card.errors.any?
     #error_explanation
       %h2= "#{pluralize(@card.errors.count, "error")} prohibited this card from being saved:"
@@ -30,6 +30,9 @@
   .field
     = f.label :card_moreinfo
     = f.text_area :moreinfo ,:rows=>3 
+  .field
+    = f.label :card_tag
+    = f.text_field :tag_list ,:rows=>3 
   .field
     = f.label :card_image
     = f.file_field :avatar 

@@ -17,11 +17,16 @@
         %td= card.card_type
 
         %td= link_to 'Show Benifits', card
-        %td= link_to 'Edit', edit_card_path(card)
-        %td= link_to 'Destroy', card, :confirm => 'Are you sure?', :method => :delete
+        %td= link_to 'Edit', edit_card_path(card)   if current_user.has_role? :admin
+        %td= link_to 'Destroy', card, :confirm => 'Are you sure?', :method => :delete if current_user.has_role? :admin
 
+  
   %br
-
+  - if params[:action] == 'index'
+    = paginate @cards
+ 
+  %br
+  
   = link_to 'New Card', new_card_path
 
   %br 

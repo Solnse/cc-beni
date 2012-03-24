@@ -13,8 +13,7 @@ stats_url = "http://www.choose.net/money/credit-cards/compare/0-balance-transfer
    login_form = page.form_with(:action => '/money/credit-cards/compare/0-balance-transfer/')
    page = agent.submit login_form
    doc = Hpricot(page.content)
-	p "sssssssssssssssssssss"
-   
+    
    parse_html_code(doc,page,agent,'0% period','Transfer Fee','Add Info','Sutaible Pending','Apr')    
    
    page = agent.click(page.link_with(:text => 'Life Balance Transfers'))
@@ -91,36 +90,32 @@ end
 
 def parse_html_code(doc,page,agent,title1='',title2='',title3='',title4='',title5='',title6='')
  cardold = []
-	p "hhhhhhhhhhhhhhhhhhhhhhhh"
+ 
 (doc/"table.comparison//tr").each do |row|
-	p "aaaaaaaaaaaaaaaaaaaaaa"
-   i = -1
+    i = -1
     	
     card = Card.new
-    p "zzzzzzzzzzzzzzzzzz"
-    (row/"td").each do |cell|
-	p "qqqqqqqqqqqqqqqqqqqqqq"
-      if cell.attributes.to_s.include?("example bold")
-              p cell.inner_html    
-   	      p "zazazazaazazazazazzaz"	    
+      (row/"td").each do |cell|
+       if cell.attributes.to_s.include?("example bold")
+  
         card = cardold[cardold.length-1]
         card.example = cell.inner_text
-        
-        p card 
-        p "this is card"
-        card.save
+           card.save
        	
       else  
        i = i+1 
-       p "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaasssssssssssssssssssssssssssss"
-       if i == 0
+        if i == 0
        card.card_name = cell.inner_text
-	 p  "here i should get the imageeee"
+	 
 	  (cell/"").each do |aa|
 		        image = (aa/"a").inner_html.split("\"")[1] 
+			p "splited images"
+			p image
 	                system("wget -nd -r -l 2 -t 2 -P #{Rails.root}/app/assets/images/  "+"http://www.choose.net"+image)
-                        system("rm #{image}")   
-			card.fetch_image_name = image
+                        system("rm #{image}")
+			p "this is image" 
+                        p image  
+			card.fetch_image_name = image.split("/").last
 		 
 		 
 		end

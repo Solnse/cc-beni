@@ -1,3 +1,5 @@
+%li
+  = link_to('Show All Cards', cards_path)
 - if user_signed_in?
   %li
     = link_to('Logout', destroy_user_session_path, :method=>'delete')
@@ -7,6 +9,10 @@
 - if user_signed_in?
   %li
     = link_to('Edit account', edit_user_registration_path)
+  %li
+    = link_to('Show Profile', profile_path(current_user))
+
 - else
   %li
     = link_to('Sign up', new_user_registration_path)
+

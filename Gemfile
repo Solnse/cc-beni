@@ -28,6 +28,7 @@ gem "capybara", ">= 1.1.2", :group => :test
 gem "database_cleaner", ">= 0.7.0", :group => :test
 gem "launchy", ">= 2.0.5", :group => :test
 gem "guard", ">= 0.6.2", :group => :development
+gem 'acts-as-taggable-on', '~> 2.2.2'
 case HOST_OS
   when /darwin/i
     gem 'rb-fsevent', :group => :development
@@ -48,3 +49,7 @@ gem "guard-cucumber", ">= 0.6.1", :group => :development
 gem "devise", ">= 1.5.0"
 gem "twitter-bootstrap-rails"
 gem "rails-footnotes", ">= 3.7", :group => :development
+gem "cantango"
+gem 'kaminari'
+
+

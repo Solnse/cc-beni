@@ -131,7 +131,7 @@ def parse_html_card(doc)
 		if !image.blank?
                    system("wget -nd -r -l 2 -t 2 -P #{Rails.root}/app/assets/images/  "+image)
                    system("rm #{image}")   
-		   card.fetch_image_name = image
+		   card.fetch_image_name = image.split("/").last
 		end
 	 
 	 end	

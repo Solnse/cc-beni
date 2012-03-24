@@ -85,7 +85,13 @@ class ProfilesController < ApplicationController
 
   def add_to_profile
       if user_signed_in?
+       if current_user.profile.cards.include? Card.find(params[:id])
+	flash[:notice] = "Card Is Already Added To Your Profile"
+       else	
        CardsProfile.create(:card_id=>params[:id],:profile_id=>current_user.profile.id)
+       
+       flash[:notice] = "Card Added To Your Profile"
+       end 
        redirect_to :back
        else
        session[:card_id]=params[:id]

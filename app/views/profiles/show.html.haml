@@ -8,17 +8,23 @@
 \|
 = link_to 'Back', profiles_path
 
+
 %div
-  = label_tag "Add Your Credit Card"
-  = text_field_tag "creditcard"
+  = form_tag("/add_to_profile") do
+    = label_tag  "Add Your Credit Card"
+    = select_tag "id" , options_from_collection_for_select(Card.all, "id", "card_name")
+    = submit_tag "Submit"
 %div
-  = form_tag "/"
-  = label_tag "Enter Your purpose for current use of credit card . e.g. petrol purchase,camera purchase etc"
-  = text_field_tag "creditcard"
-  = submit_tag "Submit"
+  = form_tag(cards_find_cards_for_my_purchase_path) do
+    = label_tag "Enter Your purpose for current use of credit card . e.g. petrol purchase,camera purchase etc"
+    = text_field_tag "creditcard"
+    = submit_tag "Submit"
+
+
+%p
+
+  Already added cards will be shown here 
+- for credit in @user.profile.cards
   %p
-    Already added cards will be shown here 
-  - for credit in @user.profile.cards
-    %p
-    = link_to credit.card_name,card_url(credit)
+  = link_to credit.card_name,card_url(credit)
     

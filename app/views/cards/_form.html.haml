@@ -31,6 +31,9 @@
     = f.label :card_moreinfo
     = f.text_area :moreinfo ,:rows=>3 
   .field
+    = f.label :card_tag
+    = f.text_field :tag_list ,:value=>@card.tag_list 
+  .field
     = f.label :card_image
     = f.file_field :avatar 
 

@@ -247,10 +247,9 @@ end
 
 def parse_html_card_code(doc)
   
-p "parsing the doc"
+
 (doc/"table.schumer-box").each do |table|
-  p "ssssssssssss"
-	card = Card.new
+ 	card = Card.new
          card.card_type = "Visa"
 	card.save
      (table/"tr").each do |trrr|
@@ -264,7 +263,7 @@ p "parsing the doc"
                    image = x.inner_html.to_s.split("\"")[1]
                    if !image.blank?
                    system("wget -nd -r -l 2 -t 2 -P #{Rails.root}/app/assets/images/  "+image)
-                   system("rm #{image}")   
+                      
 		   card.fetch_image_name = image.split("/").last
 		   end
  

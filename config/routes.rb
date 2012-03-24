@@ -10,9 +10,16 @@ Ccbeni::Application.routes.draw do
   resources :features
   match "cards/search" =>"cards#search"
   match "cards/find_cards_for_me" =>"cards#find_cards_for_me"
+  match "cards/find_cards_for_my_purchase" =>"cards#find_cards_for_my_purchase"
+  match "cards/add_tags"=>"cards#add_tags"
+
+
+
+  match "add_to_profile" => "profiles#add_to_profile"
   match "add_to_profile/:id" => "profiles#add_to_profile"
+
   match "home/oldindex"=>"home#oldindex" 
- 
+  
  
   resources :cards do
      resources :features

@@ -17,7 +17,6 @@ for i in 1..9
      rescue => e
        p "there is some errororoor"
        p e
-       puts e
        puts url
      end
 end
@@ -41,6 +40,7 @@ count=1
      iname = ""
       
      iname = item.at_css(".card  ,.apply  ,.provider-click").attributes['src'].inner_text   
+      # i seen that the image is not get downloaded so i commented the code kedar	
       #if !iname.blank?
       # p "fetching the cards"
       # p iname
@@ -54,9 +54,7 @@ count=1
       card.fetch_image_name = iname
   
       card.card_name = item.at_css(".provider").text.split("\n")[1].strip
-      p "card name"
-      p card.card_name
-      card.description = item.at_css(".product-name-tab-active ,.clickable-tab,.product").text.split("\n")[3].strip  
+       card.description = item.at_css(".product-name-tab-active ,.clickable-tab,.product").text.split("\n")[3].strip  
 
        #tabone = item.at_css(".balance-transfer-tab  ,.clickable-tab p").text 
       carddet = item.at_css(".balance-transfer-tab  ,.clickable-tab p").text
