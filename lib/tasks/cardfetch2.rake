@@ -256,7 +256,8 @@ p "parsing the doc"
      (table/"tr").each do |trrr|
 	 (trrr/"th/table/tr/td/a").each do |maintext|
 		 
-			card.card_name = maintext.inner_html
+			card.card_name = maintext.inner_text
+			  
 		end
            (trrr/"td/a").each do |x|
                    
@@ -264,22 +265,24 @@ p "parsing the doc"
                    if !image.blank?
                    system("wget -nd -r -l 2 -t 2 -P #{Rails.root}/app/assets/images/  "+image)
                    system("rm #{image}")   
-		   card.fetch_image_name = image
+		   card.fetch_image_name = image.split("/").last
 		   end
  
 		end
  	 (trrr/"td/table/tr/td.rate-top").each do |maintext|
-			 card.carddetails.new(:title=> maintext.inner_html)
+			 card.carddetails.new(:title=> maintext.inner_text)
+			   
 			 card.save
 		end
 i=-1
 (trrr/"td/table/tr/td.rates-bottom").each do |maintext|
 			i=i+1;
-			card.carddetails[i].short_desc = maintext.inner_html
+			card.carddetails[i].short_desc = maintext.inner_text
+			  
 			#p card.carddetails[i]	
 			#p i
 			#p maintext.inner_html
-			card.carddetails[i].save
+			#card.carddetails[i].save
 			#p card.carddetails[i].errors
 		 	 
 		end
@@ -287,9 +290,13 @@ i=-1
 
 	 (trrr/"td").each do |maintext|
 		if maintext.attributes.to_s.include?("details")
-			maintext.inner_html.split("<li>").each do |fe|
-				card.features.new(:content=>fe)
+	 		(maintext/"li").each do |fe|			
+			 
+			card.features.new(:content=>fe.inner_text)
 			end
+
+
+			
 		else
  		end
 	 end	
