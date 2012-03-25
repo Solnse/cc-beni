@@ -1,0 +1,21 @@
+- for profile in @profiles
+  %div
+  = form_tag(profile_give_advice_path) do
+    = label_tag  "User Email"
+    = text_field "user" ,"email",:value=>profile.user.email
+    = label_tag  "Country"
+    = text_field "profile" ,"country",:value=>profile.country
+    = label_tag  "City"
+    = text_field "profile" ,"city",:value=>profile.city
+    = label_tag  "Address"
+    = text_field "profile" ,"address",:value=>profile.address
+    = label_tag  "Fico"
+    = text_field "profile" ,"fico",:value=>profile.fico
+    = label_tag  "Expert Advice"
+    = text_area "profile" ,"expert",:cols=>10,:rows=>10,:value=>profile.expert
+    = hidden_field "profile" ,"profile_id",:value=>profile.id
+
+
+
+   
+    = submit_tag "Submit"

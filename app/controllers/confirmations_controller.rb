@@ -9,9 +9,8 @@ class ConfirmationsController  < Devise::SessionsController
       sign_in(resource_name, resource)
  
         if  !session[:card_id].blank? 
-	  flash[:notice] = "Card Is Already Added To Your Profile"
-        else	
-          CardsProfile.create(:card_id=>params[:id],:profile_id=>current_user.profile.id)
+	  flash[:notice] = "Card Is  Added To Your Profile"
+          CardsProfile.create(:card_id=>session[:card_id],:profile_id=>current_user.profile.id)
         end
         session[:card_id] = nil
       respond_with_navigational(resource){ redirect_to after_confirmation_path_for(resource_name, resource) }

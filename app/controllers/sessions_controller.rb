@@ -13,7 +13,7 @@ class SessionsController < Devise::SessionsController
      if  !session[:card_id].blank? and current_user.profile.cards.include? Card.find(session[:card_id])
 	  flash[:notice] = "Card Is Already Added To Your Profile"
      else	
-          CardsProfile.create(:card_id=>params[:id],:profile_id=>current_user.profile.id)
+          CardsProfile.create(:card_id=>session[:card_id],:profile_id=>current_user.profile.id)
      end
      session[:card_id] = nil
    

@@ -13,6 +13,11 @@
     = link_to('Edit account', edit_user_registration_path)
   %li
     = link_to('Show Profile', profile_path(current_user))
+- if !current_user.blank? and  current_user.has_role? :admin
+  %li
+    = link_to('Send Member Advice', profile_give_advice_path)
+  
+
 
 - else
   %li

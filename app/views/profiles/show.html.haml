@@ -3,7 +3,11 @@
 %p
   %b User:
   = @user.email
-
+  %br
+- if !@user.profile.expert.blank? 
+  %b Expert Message:
+  = @user.profile.expert 
+  %br
 =# link_to 'Edit', edit_profile_path(@user.profile.id)
 \|
 = link_to 'Back', profiles_path

@@ -99,4 +99,15 @@ class ProfilesController < ApplicationController
        end		
   end 
 
+  def give_advice
+     @profiles = Profile.request_advice
+     if !params[:profile].blank?
+        profile = Profile.find(params[:profile][:profile_id])
+        profile.expert = params[:profile][:expert]
+        profile.save
+        redirect_to :back
+     end
+  end
+
+
 end

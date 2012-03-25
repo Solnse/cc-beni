@@ -96,13 +96,20 @@ class CardsController < ApplicationController
     end	
   end
 
+  #here i will store the user information which admin will check and send him information about which credit card is useful for him
   def find_cards_for_me
-      	p params[:profession]
-        p params[:purpose] 
-      if !params[:profession].blank?
-          
+     if current_user.blank?
+         flash[:notice]="Please Sign In To Get The Expert Advice For Purchasing A Credit Card" 
+         redirect_to new_user_session_path and return
+     end	
+     @profile = current_user.profile 
+     if !params[:profile].blank?	
+      
+      	
+      current_user.profile.update_attributes(params[:profile])
+      flash[:notice] = "Expert Person Will Write A Message Within 24 Houres."
+      redirect_to :back
       end
-
   end
 
  
@@ -117,7 +124,7 @@ class CardsController < ApplicationController
      @cards.flatten!
       	 		
      @cards = Kaminari.paginate_array(@cards).page(params[:page]).per(10) 
-     p "lastly i get the cards"
+      
      
      #this is for array pagination	
      @cards.instance_eval <<-EVAL
