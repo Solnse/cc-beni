@@ -9,14 +9,19 @@ class SessionsController < Devise::SessionsController
     sign_in(resource_name, resource)
 #    respond_with resource, :location => after_sign_in_path_for(resource)
      #render :text=>"logged in"
-     p "logged in user"
-     if !session[:card_id].blank?
-         CardsProfile.create(:card_id=>session[:card_id],:profile_id=>current_user.profile.id)
-         session[:card_id] = nil 
+      
+     if  !session[:card_id].blank? and current_user.profile.cards.include? Card.find(session[:card_id])
+	  flash[:notice] = "Card Is Already Added To Your Profile"
+     else	
+          CardsProfile.create(:card_id=>params[:id],:profile_id=>current_user.profile.id)
      end
+     session[:card_id] = nil
+   
      redirect_to profile_path(current_user)
   end
   def auth_options
     { :scope => resource_name, :recall => "#{controller_path}#new" }
   end
+
+
 end

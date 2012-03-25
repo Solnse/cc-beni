@@ -33,7 +33,7 @@ Ccbeni::Application.routes.draw do
 
   root :to => "home#index"
 
-  devise_for :users, :controllers => {:sessions =>"sessions"}
+  devise_for :users, :controllers => {:sessions =>"sessions",:confirmations=>"confirmations"}
   resources :users, :only => :show
    
   # The priority is based upon order of creation:

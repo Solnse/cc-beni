@@ -85,7 +85,7 @@ class CardsController < ApplicationController
  
   def search
     if !params[:creditcard].blank?
-      @cards = Card.find(:all,:conditions=>["card_name like ?","%#{params[:creditcard][:name]}%"])
+      @cards = Card.where("card_name like ?","%#{params[:creditcard][:name]}%").page(params[:page]).per(5)
     
     if @cards.blank?
       flash[:notice] = "not found"  
@@ -110,13 +110,31 @@ class CardsController < ApplicationController
   # first create a add tag to a credit card
   #then find it here properly
   def find_cards_for_my_purchase
-     @cards = Card.tagged_with(params[:creditcard])
-     @cards << Card.find(:all,:conditions=>["card_name like ? ","%#{params[:creditcard]}%"])
-     @cards.flatten!
-     Kaminari.paginate_array(@cards).page(params[:page]).per(10)
      
-      if @cards.blank?
-      flash[:notice] = "not found"  
+     @cards = Card.tagged_with(params[:creditcard])
+     @cards << Card.includes([:features]).where("card_name like ? or features.content like ?","%#{params[:creditcard]}%","%#{params[:creditcard]}%")
+
+     @cards.flatten!
+      	 		
+     @cards = Kaminari.paginate_array(@cards).page(params[:page]).per(10) 
+     p "lastly i get the cards"
+     
+     #this is for array pagination	
+     @cards.instance_eval <<-EVAL
+      def current_page
+        #{params[:page] || 1}
+      end
+      def num_pages
+        count
+      end
+      def limit_value                                                                               
+        20
+      end
+EVAL
+     
+    if @cards.blank?
+      flash[:notice] = "No Creadit Card Were Found For This Type Of Purchase"  
+      redirect_to :back 
     else
       flash[:notice] = "found"  
       render :action=> :index  and return;
@@ -126,7 +144,7 @@ class CardsController < ApplicationController
 
 private
   def check_admin
-    if current_user.has_role? :admin
+    if  !current_user.blank? and  current_user.has_role? :admin
     else
      flash[:notice] = "Only Admin Can Edit This" 
      redirect_to "/"

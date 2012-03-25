@@ -4,7 +4,7 @@
   %b User:
   = @user.email
 
-= link_to 'Edit', edit_profile_path(@user)
+=# link_to 'Edit', edit_profile_path(@user.profile.id)
 \|
 = link_to 'Back', profiles_path
 
@@ -15,11 +15,7 @@
     = select_tag "id" , options_from_collection_for_select(Card.all, "id", "card_name")
     = submit_tag "Submit"
 %div
-  = form_tag(cards_find_cards_for_my_purchase_path) do
-    = label_tag "Enter Your purpose for current use of credit card . e.g. petrol purchase,camera purchase etc"
-    = text_field_tag "creditcard"
-    = submit_tag "Submit"
-
+  = render 'purchase_search'
 
 %p
 

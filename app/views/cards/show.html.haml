@@ -1,8 +1,12 @@
-%p#notice= notice
+
 
 %p
-- if !current_user.profile.cards.include? @card
+- if !current_user.blank? and !current_user.profile.cards.include? @card
   = link_to "Add To Profile","/add_to_profile/#{@card.id}",:method=>:post  
+- elsif current_user.blank?
+  Please	
+  = link_to "Login","/add_to_profile/#{@card.id}" 
+  To Add It To Profile
 - else
   Included In Your Profile 
 %p
@@ -40,8 +44,8 @@
   - for feature in @card.features
     %p 
       = feature.content
-    
-  = render "features/form" 
+  - if !current_user.blank? and current_user.has_role? :admin   
+    = render "features/form" 
 
 %p{:class=>:feature}
   %b All Card Deatils
@@ -56,12 +60,14 @@
       %b Long Description:
       = carddetail.long_desc
       %br		
+  - if !current_user.blank? and current_user.has_role? :admin   
     
-  = render "carddetails/form" 
+    = render "carddetails/form" 
 
 
 
+  - if !current_user.blank? and current_user.has_role? :admin   
 
-= link_to 'Edit', edit_card_path(@card)
+    = link_to 'Edit', edit_card_path(@card)
 \|
 = link_to 'Back', cards_path

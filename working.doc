@@ -19,4 +19,17 @@ added the tables for making the profile and card relation as this will be many t
 
 
 
+the flow should be as follows
 
+1)user comes to home page
+    two links
+    already have credit card
+    already dont have credit card
+2)  already have credit card
+    enter a credit card name
+    get all the credit card list 
+    click on see benifits
+    click to add to profile
+    register and get added.
+          
+ 

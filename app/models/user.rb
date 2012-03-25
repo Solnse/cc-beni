@@ -12,10 +12,10 @@ class User < ActiveRecord::Base
 
    # returns/calculates list of symbols, where each symbol is a name of a role the user currently has
   def roles_list
-    if self.id == 1	
+    if self.email == "admin@gmail.com"	
     [:admin, :member]
     else
-	[:member,:admin]
+	[:member]
     end   
   end
 
@@ -27,4 +27,6 @@ class User < ActiveRecord::Base
   def create_profile
     Profile.create(:user_id=>self.id)
    end
+  
+
 end

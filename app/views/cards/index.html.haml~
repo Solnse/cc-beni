@@ -1,6 +1,6 @@
 %div
   = render 'cards/search'
-
+  = render 'profiles/purchase_search'
   %h1 Listing cards
 
   %table
@@ -17,18 +17,18 @@
         %td= card.card_type
 
         %td= link_to 'Show Benifits', card
-        %td= link_to 'Edit', edit_card_path(card)   if current_user.has_role? :admin
-        %td= link_to 'Destroy', card, :confirm => 'Are you sure?', :method => :delete if current_user.has_role? :admin
+        %td= link_to 'Edit', edit_card_path(card)   if current_user && current_user.has_role?(:admin)
+        %td= link_to 'Destroy', card, :confirm => 'Are you sure?', :method => :delete if   current_user && current_user.has_role?(:admin)
 
   
   %br
-  - if params[:action] == 'index'
-  = paginate @cards
+    = paginate @cards, :params => {:creditcard => params[:creditcard]}
+      	
  
   %br
-  
-  = link_to 'New Card', new_card_path
+  - if !current_user.blank? and current_user.has_role? :admin   
+    = link_to 'New Card', new_card_path
 
   %br 
   
-  = link_to "Do You want to add this to u r profile","user_profile"
+ 

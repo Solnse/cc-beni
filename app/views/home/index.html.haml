@@ -1,9 +1,10 @@
 %div
- 
-  %div
-    %div{:class=>"placemeleft"} 
-      %a{:href=>"/cards/search"} Already Have An Credit Card 
-    %div{:class=>"placemeright"} 
-      %a{:href=>cards_find_cards_for_me_url} Already Dont Have An Credit Card 
+  %div{:id=>"flash"}
+    = flash[:notice] 
+    %div
+      %div{:class=>"placemeleft"} 
+        %a{:href=>"/cards/search"} Already Have An Credit Card 
+      %div{:class=>"placemeright"} 
+        %a{:href=>cards_find_cards_for_me_url} Already Dont Have An Credit Card 
   
   
