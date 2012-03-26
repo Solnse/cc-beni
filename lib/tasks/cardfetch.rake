@@ -5,7 +5,7 @@ task :fetch_cards => :environment do
     require 'open-uri'  
     require 'rubygems'
     
-    	 
+   	 
  
 url = "http://www.moneysupermarket.com/credit-cards/"
 call_import_cards_data(url);

@@ -2,7 +2,7 @@ task :fetch_cards4 => :environment do
  require 'rubygems'
  require 'mechanize'
  require 'hpricot'
-stats_url = "http://www.indexcreditcards.com/creditcardlist.html"
+ stats_url = "http://www.indexcreditcards.com/creditcardlist.html"
   
    # instantiate/initialise web agent ..
    agent = Mechanize.new

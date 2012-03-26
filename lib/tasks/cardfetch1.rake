@@ -14,40 +14,40 @@ stats_url = "http://www.choose.net/money/credit-cards/compare/0-balance-transfer
    page = agent.submit login_form
    doc = Hpricot(page.content)
     
-   parse_html_code(doc,page,agent,'0% period','Transfer Fee','Add Info','Sutaible Pending','Apr')    
+   parse_html_code(doc,page,agent,'0-balance-transfer','0% period','Transfer Fee','Add Info','Sutaible Pending','Apr')    
    
    page = agent.click(page.link_with(:text => 'Life Balance Transfers'))
    doc = Hpricot(page.content)
-    parse_html_code(doc,page,agent,'balance transfer offer','Transfer Fee','Add Info','Sutaible Pending','Apr')
+    parse_html_code(doc,page,agent,'Life Balance Transfers','balance transfer offer','Transfer Fee','Add Info','Sutaible Pending','Apr')
     
     
    page = agent.click(page.link_with(:text => '0% Super Transfers'))
    login_form = page.form_with(:action => '/money/credit-cards/compare/super-balance-transfer/')
    page = agent.submit login_form
    doc = Hpricot(page.content)
-   parse_html_code(doc,page,agent,'0% period','Money Transfer Fee','Add Info','Sutaible Pending','Apr')
+   parse_html_code(doc,page,agent,'0% Super Transfers','0% period','Money Transfer Fee','Add Info','Sutaible Pending','Apr')
    
    page = agent.click(page.link_with(:text => '0% with Purchases'))
    login_form = page.form_with(:action => '/money/credit-cards/compare/0-balance-transfer-purchase/')
    page = agent.submit login_form
    doc = Hpricot(page.content)
-   parse_html_code(doc,page,agent,'Balance Transfer Offer','Transfer Fee','Add Info','Sutaible Pending','Apr')
+   parse_html_code(doc,page,agent,'0% with Purchases','Balance Transfer Offer','Transfer Fee','Add Info','Sutaible Pending','Apr')
    
    page = agent.click(page.link_with(:text => '0% Purchases'))
    login_form = page.form_with(:action => '/money/credit-cards/compare/0-purchase/')
    page = agent.submit login_form
    doc = Hpricot(page.content)
-  parse_html_code(doc,page,agent,'period','rewards','Add Inform','Apr')
+  parse_html_code(doc,page,agent,'0% Purchases','period','rewards','Add Inform','Apr')
     
   page = agent.click(page.link_with(:text => 'Low Purchase Rate'))
    doc = Hpricot(page.content)
-  parse_html_code(doc,page,agent,'Purchase Standard rate','purchase intro','rewards','Add Info')
+  parse_html_code(doc,page,agent,'Low Purchase Rate','Purchase Standard rate','purchase intro','rewards','Add Info')
   
    page = agent.click(page.link_with(:text => 'Use Abroad'))
    login_form = page.form_with(:action => '/money/credit-cards/compare/use-abroad/')
    page = agent.submit login_form
    doc = Hpricot(page.content)
-  parse_html_code(doc,page,agent,'Foreign Transaction fee','Cash rate','rewards','notimp','annual fee ','standard rate')
+  parse_html_code(doc,page,agent,'Use Abroad','Foreign Transaction fee','Cash rate','rewards','notimp','annual fee ','standard rate')
  
    page = agent.click(page.link_with(:text => 'Poor Credit Score'))
    doc = Hpricot(page.content)
@@ -57,11 +57,11 @@ stats_url = "http://www.choose.net/money/credit-cards/compare/0-balance-transfer
    login_form = page.form_with(:action => '/money/credit-cards/compare/rewards/')
    page = agent.submit login_form
    doc = Hpricot(page.content)
-  parse_html_code(doc,page,agent,'reward','purchase intro','add info','annual fee','standard rate')
+  parse_html_code(doc,page,agent,'Poor Credit Score','reward','purchase intro','add info','annual fee','standard rate')
  
    page = agent.click(page.link_with(:text => 'Cash Back'))
     doc = Hpricot(page.content)
-  parse_html_code(doc,page,agent,'reward','purchase intro','add info','annual fee','standard rate')
+  parse_html_code(doc,page,agent,'Cash Back','reward','purchase intro','add info','annual fee','standard rate')
   
     page = agent.click(page.link_with(:text => 'Air Miles'))
        login_form = page.form_with(:action => '/money/credit-cards/compare/air-miles/')
@@ -69,14 +69,14 @@ stats_url = "http://www.choose.net/money/credit-cards/compare/0-balance-transfer
 
     
     doc = Hpricot(page.content)
-  parse_html_code(doc,page,agent,'reward','purchase intro','add info','annual fee','standard rate')
+  parse_html_code(doc,page,agent,'Air Miles','reward','purchase intro','add info','annual fee','standard rate')
 page = agent.click(page.link_with(:text => 'Instant Decision'))
        login_form = page.form_with(:action => '/money/credit-cards/compare/instant-decision/')
    page = agent.submit login_form
 
     
     doc = Hpricot(page.content)
-  parse_html_code(doc,page,agent,'balance transfer offer','purchase intro offer','rewards','add information')
+  parse_html_code(doc,page,agent,'Instant Decision','balance transfer offer','purchase intro offer','rewards','add information')
 
     
     
@@ -88,18 +88,21 @@ page = agent.click(page.link_with(:text => 'Instant Decision'))
     
 end
 
-def parse_html_code(doc,page,agent,title1='',title2='',title3='',title4='',title5='',title6='')
+def parse_html_code(doc,page,agent,speciality='',title1='',title2='',title3='',title4='',title5='',title6='')
  cardold = []
  
 (doc/"table.comparison//tr").each do |row|
     i = -1
-    	
-    card = Card.new
+     card = Card.new
+    card.speciality = speciality
+    card.card_type = "Visa"
+    card.save
       (row/"td").each do |cell|
        if cell.attributes.to_s.include?("example bold")
   
         card = cardold[cardold.length-1]
         card.example = cell.inner_text
+        
            card.save
        	
       else  
@@ -120,7 +123,7 @@ def parse_html_code(doc,page,agent,title1='',title2='',title3='',title4='',title
 		 
 		end
 	 
-       card.card_type = "Visa"
+       
        end
        if i == 1
 	
