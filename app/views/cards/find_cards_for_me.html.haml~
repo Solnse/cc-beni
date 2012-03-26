@@ -1,13 +1,32 @@
 %div
-  Please Enter Following Question To Get The BEst Choice For You
+  Please Enter Following Question To Get The Best Choice For You
   Also If You Sign Up You Can See More Information On Your Profile Page
 %div
+  =flash[:notice]
   = form_tag "/cards/find_cards_for_me"
-  %div
-    = label_tag "Enter Your Profession"
-    = text_field_tag "profession"
-  %div
+  %div{:class=>"form_field"}
+    = label_tag "Enter Your Address"
+    = text_field  "profile", "address",:value=>current_user.email,:disabled=>true
+  %div{:class=>"form_field"}
+    = label_tag "Enter Your Country"
+    = text_field  "profile", "country"
+  %div{:class=>"form_field"}
+    = label_tag "Enter Your city"
+    = text_field  "profile", "city"
+  %div{:class=>"form_field"}
+    = label_tag "Enter Your Fico Number"
+    = text_field  "profile", "fico"
+
+
+  %div{:class=>"form_field"}
     = label_tag "Enter Key words for credit cards for the purpose you want seperated by coma , . e.g grocessary,loan,bonus,gift etc"
-    = text_field_tag "purpose"
+    = text_area "profile","purpose",:cols=>10,:rows=>10
+- if !@profile.expert.blank?  
+  %div{:class=>"form_field"}
+    = label_tag "profile expert"
+    = text_area "profile","expert",:cols=>10,:rows=>10
+
+
+
   %div{:class=>"form_field"}
     = submit_tag "Submit"

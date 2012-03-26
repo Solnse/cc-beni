@@ -1,6 +1,6 @@
 %div
   = render 'cards/search'
-  = render 'profiles/purchase_search'
+  
   %h1 Listing cards
 
   %table
@@ -22,7 +22,7 @@
 
   
   %br
-    = paginate @cards, :params => {:creditcard => params[:creditcard]}
+    = paginate @cards 
       	
  
   %br

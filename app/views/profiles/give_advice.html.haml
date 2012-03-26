@@ -11,6 +11,8 @@
     = text_field "profile" ,"address",:value=>profile.address
     = label_tag  "Fico"
     = text_field "profile" ,"fico",:value=>profile.fico
+    = label_tag  "Purpose"
+    = text_field "profile" ,"purpose",:value=>profile.purpose
     = label_tag  "Expert Advice"
     = text_area "profile" ,"expert",:cols=>10,:rows=>10,:value=>profile.expert
     = hidden_field "profile" ,"profile_id",:value=>profile.id

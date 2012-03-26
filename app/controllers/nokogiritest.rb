@@ -2,7 +2,7 @@ require 'rubygems'
 require 'mechanize'
 require 'hpricot'
  
-   stats_url = "http://www.creditcards.com/low-interest.php"
+   stats_url = "http://www.cardratings.com/cardrepfr.html"
   
    # instantiate/initialise web agent ..
    agent = Mechanize.new
@@ -15,26 +15,22 @@ require 'hpricot'
     
         
   
-(doc/"table.schumer-box").each do |table|
-     (table/"tr").each do |trrr|
-	 (trrr/"th/table/tr/td/a").each do |maintext|
-			p maintext.inner_html
+(doc/"div.carditem").each do |divc|
+   # p divc.inner_html
+	card = Card.new
+	card.card_type = "Visa"     
+	(divc/"h3,div").each do |info|
+ 	 if  info.attributes.to_s.include?"Info" 
+		p "featureeeee"
+                (info/"li").each do |x|
+		card.features.new(:content=> x.inner_text)
+		
 		end
-	 (trrr/"td/table/tr/td.rate-top").each do |maintext|
-			p maintext.inner_html
-		end
-(trrr/"td/table/tr/td.rates-bottom").each do |maintext|
-			p maintext.inner_html
-		end
-
-
-	 (trrr/"td").each do |maintext|
-		if maintext.attributes.to_s.include?("details")
-			p maintext.inner_html.split("<li>")
-		else
- 		end
+         end
+	 if info.attributes.to_s.include?"carditem clearfix"
+		 
+		card.card_name = (info/"h3 a.trackLink").inner_text.split("\n")[0]
 	 end	
-	       end 
-break;
+	card.save
 end
-  
+  end
