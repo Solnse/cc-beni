@@ -86,16 +86,19 @@ class CardsController < ApplicationController
   end
  
   def search
-    if !params[:creditcard].blank?
-      @cards = Card.where("card_name like ?","%#{params[:creditcard][:name]}%").page(params[:page]).per(5)
-    
+   
+    if params[:creditcard]
+      @cards = Card.where("card_name like ?","%#{params[:creditcard][:name]}%").page(params[:page])
+    end
     if @cards.blank?
       flash[:notice] = "not found"  
     else
-      flash[:notice] = "found"  
-      render :action=> :index  and return;
+      flash[:notice] = "Found Cards Are As Follows"  
+     # render :action=> :index  and return;
     end
-    end	
+     
+    
+    	
   end
 
   #here i will store the user information which admin will check and send him information about which credit card is useful for him
