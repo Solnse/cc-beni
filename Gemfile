@@ -8,6 +8,7 @@ gem "thin"
 gem "heroku"
 gem 'hpricot'
 gem 'mechanize'
+gem 'will_paginate'
 group :assets do
   gem 'sass-rails',   '~> 3.1.5'
   gem 'coffee-rails', '~> 3.1.1'
@@ -50,6 +51,6 @@ gem "devise", ">= 1.5.0"
 gem "twitter-bootstrap-rails"
 gem "rails-footnotes", ">= 3.7", :group => :development
 gem "cantango"
-gem 'kaminari'
+#gem 'kaminari'
 
 

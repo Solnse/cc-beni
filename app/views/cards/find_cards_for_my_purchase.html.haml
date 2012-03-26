@@ -22,8 +22,7 @@
 
   
   %br
-    = will_paginate @cards 
-      	
+    = will_paginate @cards  
  
   %br
   - if !current_user.blank? and current_user.has_role? :admin   

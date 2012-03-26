@@ -1,4 +1,6 @@
 class CardsController < ApplicationController
+ require 'will_paginate/array'
+
   before_filter :check_admin ,:only=>[:edit,:destroy]
   # GET /cards
   # GET /cards.json
@@ -117,34 +119,27 @@ class CardsController < ApplicationController
   # first create a add tag to a credit card
   #then find it here properly
   def find_cards_for_my_purchase
-     
-     @cards = Card.tagged_with(params[:creditcard])
-     @cards << Card.includes([:features]).where("card_name like ? or features.content like ?","%#{params[:creditcard]}%","%#{params[:creditcard]}%")
+     p params
+     p "these are params"
+    # @cards = Card.tagged_with(params[:creditcard])
+    # @cards << Card.includes([:features]).where("card_name like ? or features.content like ?","%#{params[:creditcard]}%","%#{params[:creditcard]}%")
+     session[:creditcard] = params[:creditcard] if !params[:creditcard].blank?
+     @cards = []
+     session[:creditcard].split(",").each do |cr|
+     @cards << Card.where("speciality like '%#{cr}%' and speciality != '' and speciality is not null").order(:created_at) 
+      end
+      session[:creditcard].split(",").each do |cr|
+      @cards << Card.tagged_with(cr)
+      end
+      @cards.flatten! 
+      @cards = @cards.paginate(:page => params[:page], :per_page => 10)
 
-     @cards.flatten!
-      	 		
-     @cards = Kaminari.paginate_array(@cards).page(params[:page]).per(10) 
-      
-     
-     #this is for array pagination	
-     @cards.instance_eval <<-EVAL
-      def current_page
-        #{params[:page] || 1}
-      end
-      def num_pages
-        count
-      end
-      def limit_value                                                                               
-        20
-      end
-EVAL
-     
     if @cards.blank?
       flash[:notice] = "No Creadit Card Were Found For This Type Of Purchase"  
       redirect_to :back 
     else
-      flash[:notice] = "found"  
-      render :action=> :index  and return;
+      flash[:notice] = "Following Credit Cards Were Found"  
+       
     end
 
   end
