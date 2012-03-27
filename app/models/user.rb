@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
 
    # returns/calculates list of symbols, where each symbol is a name of a role the user currently has
   def roles_list
-    if self.email == "admin@gmail.com"	
+    if self.email == "cedie@hotmail.com"	
     [:admin, :member]
     else
 	[:member]
