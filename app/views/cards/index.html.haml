@@ -10,6 +10,9 @@
       %th
       %th
       %th
+      %th Up Vote
+      %th Down Vote
+
 
     - @cards.each do |card|
       %tr
@@ -19,8 +22,17 @@
         %td= link_to 'Show Benifits', card
         %td= link_to 'Edit', edit_card_path(card)   if current_user && current_user.has_role?(:admin)
         %td= link_to 'Destroy', card, :confirm => 'Are you sure?', :method => :delete if   current_user && current_user.has_role?(:admin)
-
-  
+        %td
+          %span{:id=>"uplink"+card.id.to_s}
+            = link_to('Add Vote','cards/add_vote/'+card.id.to_s,:remote=>true)  
+          %span{:id=>'upvote'+card.id.to_s}
+            =card.total_upvotes
+          
+        %td
+          %span{:id=>"downlink"+card.id.to_s}
+            = link_to('Down Vote','cards/down_vote/'+card.id.to_s,:remote=>true)  
+          %span{:id=>'downvote'+card.id.to_s}
+            =card.total_downvotes  
   %br
     = will_paginate @cards 
       	

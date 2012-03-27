@@ -13,7 +13,8 @@ Ccbeni::Application.routes.draw do
   match "cards/find_cards_for_my_purchase" =>"cards#find_cards_for_my_purchase"
   match "cards/add_tags"=>"cards#add_tags"
   match "profile/give_advice"=>"profiles#give_advice"
-
+  match "cards/add_vote/:id"=>"cards#add_vote"
+  match "cards/down_vote/:id"=>"cards#down_vote"
 
   match "add_to_profile" => "profiles#add_to_profile"
   match "add_to_profile/:id" => "profiles#add_to_profile"

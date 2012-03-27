@@ -147,6 +147,19 @@ class CardsController < ApplicationController
 
   end
 
+  def add_vote
+      @card = Card.find(params[:id])
+      @card.total_upvotes = @card.total_upvotes.to_i + 1
+      @card.save
+  end
+  def down_vote
+      @card = Card.find(params[:id])
+      @card.total_downvotes = @card.total_downvotes.to_i + 1
+      @card.save
+      
+  end
+
+
 private
   def check_admin
     if  !current_user.blank? and  current_user.has_role? :admin

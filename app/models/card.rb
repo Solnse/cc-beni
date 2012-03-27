@@ -1,7 +1,7 @@
 class Card < ActiveRecord::Base
 
   acts_as_taggable     
-    
+    self.per_page = 10
   attr_accessible :card_name, :card_type,:description,:example,:cash_back,:credit_builder,:expertopinion,:moreinfo,:avatar
   
   validates_presence_of :card_name, :card_type, :message => " should not be empty! "
