@@ -7,6 +7,8 @@
 # Corrections? Improvements? Create a GitHub issue: 
 # http://github.com/RailsApps/rails3-application-templates/issues
 #----------------------------------------------------------------------------
+#no need to include images
+app/assets/images/*
 
 # bundler state
 /.bundle
