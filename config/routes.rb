@@ -20,7 +20,7 @@ Ccbeni::Application.routes.draw do
   match "add_to_profile/:id" => "profiles#add_to_profile"
 
   match "home/oldindex"=>"home#oldindex" 
-  
+  #match "users/index"  =>"users#index"
  
   resources :cards do
      resources :features
@@ -35,8 +35,8 @@ Ccbeni::Application.routes.draw do
   root :to => "home#index"
 
   devise_for :users, :controllers => {:sessions =>"sessions",:confirmations=>"confirmations"}
-  resources :users, :only => :show
-   
+  resources :users, :only =>[ :show,:index]
+    
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

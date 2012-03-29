@@ -6,9 +6,10 @@ Feature: Sign in
     Scenario: User is not signed up
       Given I do not exist as a user
       When I sign in with valid credentials
+      When I Log in with user details
       Then I see an invalid login message
         And I should be signed out
-
+    
     Scenario: User enters wrong password
       Given I exist as a user
         And I am not logged in

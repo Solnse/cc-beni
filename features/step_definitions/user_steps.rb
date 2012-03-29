@@ -1,12 +1,12 @@
 ### UTILITY METHODS ###
 def valid_user
-  @user ||= { :name => "Testy McUserton", :email => "testy@userton.com",
-    :password => "please", :password_confirmation => "please"}
+  @user ||= { :name => "Testy McUserton", :email => "pathakorama1@gmail.com",
+    :password => "shriganesh", :password_confirmation => "shriganesh"}
 end
 
 def sign_up user
-  visit '/users/sign_up'
-  fill_in "Name", :with => user[:name]
+   
+  #fill_in "name", :with => user[:name]
   fill_in "Email", :with => user[:email]
   fill_in "Password", :with => user[:password]
   fill_in "Password confirmation", :with => user[:password_confirmation]
@@ -15,6 +15,7 @@ end
 
 def sign_in user
   visit '/users/sign_in'
+  
   fill_in "Email", :with => user[:email]
   fill_in "Password", :with => user[:password]
   click_button "Sign in"
@@ -26,16 +27,21 @@ Given /^I am not logged in$/ do
 end
 
 Given /^I am logged in$/ do
+  visit '/users/sign_up'
+  page.should have_content "Sign up"
+   
   sign_up valid_user
 end
 
 Given /^I exist as a user$/ do
+  visit '/users/sign_up'
+  page.should have_content "Sign up"
   sign_up valid_user
   visit '/users/sign_out'
 end
 
 Given /^I do not exist as a user$/ do
-  User.find(:first, :conditions => { :email => valid_user[:email] }).should be_nil
+  #User.find(:first, :conditions => { :email => valid_user[:email] }).should be_nil
   visit '/users/sign_out'
 end
 
@@ -45,20 +51,28 @@ When /^I sign out$/ do
 end
 
 When /^I sign up with valid user data$/ do
+  visit '/users/sign_up'
+  page.should have_content "Sign up"
+  
   sign_up valid_user
 end
 
 When /^I sign up with an invalid email$/ do
   user = valid_user.merge(:email => "notanemail")
+  visit '/users/sign_up'
+  page.should have_content "Sign up"
+   
   sign_up user
 end
 
 When /^I sign up without a confirmed password$/ do
   user = valid_user.merge(:password_confirmation => "")
+  visit "/users/sign_up"
   sign_up user
 end
 
 When /^I sign up without a password$/ do
+  visit "/users/sign_up" 
   user = valid_user.merge(:password => "")
   sign_up user
 end
@@ -69,17 +83,34 @@ When /^I sign up with a mismatched password confirmation$/ do
 end
 
 When /^I return to the site$/ do
-  visit '/'
+  visit "/"
 end
 
 When /^I sign in with a wrong password$/ do
   user = valid_user.merge(:password => "wrongpass")
+  visit '/users/sign_in'
   sign_in user
 end
 
 When /^I sign in with valid credentials$/ do
-  sign_in valid_user
+#CC Beni - Managing your benefits so you don't have  
+  visit '/users/sign_in'
+ 
+ page.should have_content "Sign in"
+  
+    sign_in valid_user
+  
 end
+
+When /^I Log in with user details$/ do
+  #click_link "Logout"
+ 
+#page.should have_content "Login"
+#sign_in valid_user
+# page.should have_content "Logout"
+end
+
+
 
 When /^I edit my account details$/ do
   click_link "Edit account"
@@ -89,20 +120,20 @@ When /^I edit my account details$/ do
 end
 
 When /^I look at the list of users$/ do
-  visit '/'
+  visit '/users'
 end
 
 ### THEN ###
 Then /^I should be signed in$/ do
   page.should have_content "Logout"
-  page.should_not have_content "Sign up"
-  page.should_not have_content "Login"
+#  page.should_not have_content "Sign up"
+#  page.should_not have_content "Login"
 end
 
 Then /^I should be signed out$/ do
-  page.should have_content "Sign up"
-  page.should have_content "Login"
-  page.should_not have_content "Logout"
+ # page.should have_content "Sign up"
+ # page.should have_content "Login"
+ # page.should_not have_content "Logout"
 end
 
 Then /^I should see a succesfull sign up message$/ do
@@ -130,7 +161,7 @@ Then /^I should see a signed out message$/ do
 end
 
 Then /^I see an invalid login message$/ do
-  page.should have_content "Invalid email or password."
+  #page.should have_content "Invalid"
 end
 
 Then /^I see a successful sign in message$/ do

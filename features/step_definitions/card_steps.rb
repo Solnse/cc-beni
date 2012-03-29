@@ -1,3 +1,4 @@
+
 def card
   @card 
 end
@@ -22,6 +23,11 @@ def add_card valid_card
 end
   
 ### Given ###
+
+ 
+Given /^I am on home page$/ do
+  visit '/users/sign_out'
+end
 
 ### When ###
 When /^I enter valid card data$/ do
@@ -52,3 +58,38 @@ Then /^I should see an invalid card name message$/ do
   page.should have_content "should not be empty!"
   page.should_not have_content "Card was successfully created"
 end
+
+
+
+
+Then /^click on  show all cards$/ do
+   click_link "Show All Cards"
+end
+
+Then /^I go To Cards Index Page$/ do
+  page.should have_content "Enter The Credit Card Name"
+end
+
+Then /^I Enter Card Name For Search with visa$/ do
+  
+    fill_in "creditcard_name", :with => "visa"
+  
+end
+
+Then /^Click to submit button$/ do
+  click_button "Submit"
+end
+
+Then /^I go to search page$/ do
+  page.should have_content "Visa"
+end
+
+Then /^I Can See Vanquis Visa card name is there$/ do
+  pending # express the regexp above with the code you wish you had
+end
+
+
+
+
+
+
