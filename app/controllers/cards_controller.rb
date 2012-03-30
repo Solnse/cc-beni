@@ -116,15 +116,13 @@ class CardsController < ApplicationController
       redirect_to :back
       end
   end
-
+  
  
 
   # first create a add tag to a credit card
   #then find it here properly
   def find_cards_for_my_purchase
-     p params
-     p "these are params"
-    # @cards = Card.tagged_with(params[:creditcard])
+     # @cards = Card.tagged_with(params[:creditcard])
     # @cards << Card.includes([:features]).where("card_name like ? or features.content like ?","%#{params[:creditcard]}%","%#{params[:creditcard]}%")
      session[:creditcard] = params[:creditcard] if !params[:creditcard].blank?
      @cards = []
@@ -142,21 +140,24 @@ class CardsController < ApplicationController
       redirect_to :back 
     else
       flash[:notice] = "Following Credit Cards Were Found"  
-       
-    end
-
+     end
   end
 
   def add_vote
       @card = Card.find(params[:id])
       @card.total_upvotes = @card.total_upvotes.to_i + 1
       @card.save
+      respond_to do |format|
+        format.js
+       end
   end
   def down_vote
       @card = Card.find(params[:id])
       @card.total_downvotes = @card.total_downvotes.to_i + 1
       @card.save
-      
+      respond_to do |format|
+        format.js
+       end
   end
 
 
@@ -166,8 +167,7 @@ private
     else
      flash[:notice] = "Only Admin Can Edit This" 
      redirect_to "/"
-
-    end
+     end
   end
 
 

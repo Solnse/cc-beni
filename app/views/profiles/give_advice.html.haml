@@ -1,6 +1,6 @@
 - for profile in @profiles
   %div
-  = form_tag(profile_give_advice_path) do
+  = form_tag(profile_give_advice_path,:id=>"user#{profile.id}") do
     = label_tag  "User Email"
     = text_field "user" ,"email",:value=>profile.user.email
     = label_tag  "Country"
@@ -16,8 +16,6 @@
     = label_tag  "Expert Advice"
     = text_area "profile" ,"expert",:cols=>10,:rows=>10,:value=>profile.expert
     = hidden_field "profile" ,"profile_id",:value=>profile.id
-
-
-
-   
     = submit_tag "Submit"
+
+
