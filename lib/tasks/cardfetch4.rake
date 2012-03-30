@@ -1,3 +1,4 @@
+
 task :fetch_cards4 => :environment do
  require 'rubygems'
  require 'mechanize'
@@ -39,3 +40,5 @@ task :fetch_cards4 => :environment do
       card.save
  end
 end
+
+

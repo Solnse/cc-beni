@@ -263,7 +263,7 @@ def parse_html_card_code(doc,speciality='')
            (trrr/"td/a").each do |x|
                    
                    image = x.inner_html.to_s.split("\"")[1]
-                   if !image.blank?
+                  if !image.blank?
                    system("wget -nd -r -l 2 -t 2 -P #{Rails.root}/app/assets/images/  "+image)
                       
 		   card.fetch_image_name = image.split("/").last

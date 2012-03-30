@@ -23,13 +23,13 @@ stats_url = "http://www.choose.net/money/credit-cards/compare/0-balance-transfer
     
    page = agent.click(page.link_with(:text => '0% Super Transfers'))
    login_form = page.form_with(:action => '/money/credit-cards/compare/super-balance-transfer/')
-   page = agent.submit login_form
+  # page = agent.submit login_form
    doc = Hpricot(page.content)
    parse_html_code(doc,page,agent,'0% Super Transfers','0% period','Money Transfer Fee','Add Info','Sutaible Pending','Apr')
    
    page = agent.click(page.link_with(:text => '0% with Purchases'))
    login_form = page.form_with(:action => '/money/credit-cards/compare/0-balance-transfer-purchase/')
-   page = agent.submit login_form
+   #page = agent.submit login_form
    doc = Hpricot(page.content)
    parse_html_code(doc,page,agent,'0% with Purchases','Balance Transfer Offer','Transfer Fee','Add Info','Sutaible Pending','Apr')
    
@@ -108,7 +108,9 @@ def parse_html_code(doc,page,agent,speciality='',title1='',title2='',title3='',t
       else  
        i = i+1 
         if i == 0
+      
        card.card_name = cell.inner_text
+       
 	 
 	  (cell/"").each do |aa|
 		        image = (aa/"a").inner_html.split("\"")[1] 
@@ -220,3 +222,6 @@ end
 
 
 end
+
+
+
